@@ -1,0 +1,643 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Hierarchical treemap of supplied program_streams.csv. Layout computed using Vega stratify and squarify treemap, rendered using Vega-Lite rect marks. Leaf counts are preserved. Blank parent values are computed as descendant sums for layout only. Change of Status may overlap visa streams; total is a sum of supplied leaf counts, not a verified count of unique migrants. Recompute coordinates when counts change.",
+  "width": 1000,
+  "height": 650,
+  "padding": 20,
+  "background": "#faf8f5",
+  "title": {
+    "text": "Pathways to permanent migration",
+    "subtitle": [
+      "Rectangle area represents supplied places • Colour identifies the major group",
+      "Change of Status is shown as supplied and may overlap visa streams; counts are not unique migrants."
+    ],
+    "anchor": "start",
+    "fontSize": 25,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#625e58",
+    "offset": 18
+  },
+  "data": {
+    "values": [
+      {
+        "id": "4",
+        "parent": "3",
+        "name": "Refugee Visas",
+        "group": "Humanitarian Program",
+        "path": "Permanent Migrant Visas > Humanitarian Program > Offshore Resettlement > Refugee Visas",
+        "places": 9511,
+        "share": 0.03086904591896348,
+        "x0": 927.6714658496371,
+        "x1": 1000,
+        "y0": 0,
+        "y1": 277.4130581108369,
+        "cx": 963.8357329248186,
+        "cy": 138.70652905541846,
+        "label": "Refugee\nVisas",
+        "show_label": false,
+        "label_y": 128.70652905541846,
+        "value_y": 161.70652905541846
+      },
+      {
+        "id": "5",
+        "parent": "3",
+        "name": "Special Humanitarian Visas",
+        "group": "Humanitarian Program",
+        "path": "Permanent Migrant Visas > Humanitarian Program > Offshore Resettlement > Special Humanitarian Visas",
+        "places": 6488,
+        "share": 0.021057551248263594,
+        "x0": 927.6714658496371,
+        "x1": 1000,
+        "y0": 277.4130581108369,
+        "y1": 466.6524568095131,
+        "cx": 963.8357329248186,
+        "cy": 372.03275746017505,
+        "label": "Special\nHumanitarian\nVisas",
+        "show_label": false,
+        "label_y": 362.03275746017505,
+        "value_y": 402.53275746017505
+      },
+      {
+        "id": "6",
+        "parent": "2",
+        "name": "Onshore Protection",
+        "group": "Humanitarian Program",
+        "path": "Permanent Migrant Visas > Humanitarian Program > Onshore Protection",
+        "places": 4001,
+        "share": 0.012985706310774144,
+        "x0": 927.6714658496371,
+        "x1": 1000,
+        "y0": 466.6524568095131,
+        "y1": 583.3520305137985,
+        "cx": 963.8357329248186,
+        "cy": 525.0022436616558,
+        "label": "Onshore\nProtection",
+        "show_label": false,
+        "label_y": 515.0022436616558,
+        "value_y": 548.0022436616558
+      },
+      {
+        "id": "8",
+        "parent": "7",
+        "name": "Resolution of Status Visas",
+        "group": "Humanitarian Program",
+        "path": "Permanent Migrant Visas > Humanitarian Program > Other Humanitarian > Resolution of Status Visas",
+        "places": 2285,
+        "share": 0.00741623067236164,
+        "x0": 927.6714658496371,
+        "x1": 1000,
+        "y0": 583.3520305137985,
+        "y1": 650,
+        "cx": 963.8357329248186,
+        "cy": 616.6760152568993,
+        "label": "Resolution\nof\nStatus\nVisas",
+        "show_label": false,
+        "label_y": 606.6760152568993,
+        "value_y": 654.6760152568993
+      },
+      {
+        "id": "11",
+        "parent": "10",
+        "name": "Employee Sponsored",
+        "group": "Skill Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Skill Stream Visas > Employee Sponsored",
+        "places": 44000,
+        "share": 0.1428070676516027,
+        "x0": 0,
+        "x1": 441.2502232992488,
+        "y0": 0,
+        "y1": 210.36724532281897,
+        "cx": 220.6251116496244,
+        "cy": 105.18362266140949,
+        "label": "Employee Sponsored",
+        "show_label": true,
+        "label_y": 95.18362266140949,
+        "value_y": 120.68362266140949
+      },
+      {
+        "id": "12",
+        "parent": "10",
+        "name": "State/Territory Nominated",
+        "group": "Skill Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Skill Stream Visas > State/Territory Nominated",
+        "places": 33000,
+        "share": 0.10710530073870202,
+        "x0": 0,
+        "x1": 441.2502232992488,
+        "y0": 210.36724532281897,
+        "y1": 368.1426793149332,
+        "cx": 220.6251116496244,
+        "cy": 289.2549623188761,
+        "label": "State/Territory Nominated",
+        "show_label": true,
+        "label_y": 279.2549623188761,
+        "value_y": 304.7549623188761
+      },
+      {
+        "id": "13",
+        "parent": "10",
+        "name": "Regional",
+        "group": "Skill Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Skill Stream Visas > Regional",
+        "places": 32948,
+        "share": 0.10693652874965921,
+        "x0": 441.2502232992488,
+        "x1": 649.3767428295098,
+        "y0": 0,
+        "y1": 333.9735072885417,
+        "cx": 545.3134830643793,
+        "cy": 166.98675364427086,
+        "label": "Regional",
+        "show_label": true,
+        "label_y": 156.98675364427086,
+        "value_y": 182.48675364427086
+      },
+      {
+        "id": "14",
+        "parent": "10",
+        "name": "Skilled Independent",
+        "group": "Skill Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Skill Stream Visas > Skilled Independent",
+        "places": 16900,
+        "share": 0.05485089643891103,
+        "x0": 649.3767428295098,
+        "x1": 756.1309670634971,
+        "y0": 0,
+        "y1": 333.9735072885417,
+        "cx": 702.7538549465035,
+        "cy": 166.98675364427086,
+        "label": "Skilled\nIndependent",
+        "show_label": true,
+        "label_y": 156.98675364427086,
+        "value_y": 189.98675364427086
+      },
+      {
+        "id": "15",
+        "parent": "10",
+        "name": "Other Skill Stream",
+        "group": "Skill Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Skill Stream Visas > Other Skill Stream",
+        "places": 5100,
+        "share": 0.01655263738689031,
+        "x0": 441.2502232992488,
+        "x1": 756.1309670634971,
+        "y0": 333.9735072885417,
+        "y1": 368.1426793149332,
+        "cx": 598.6905951813729,
+        "cy": 351.0580933017375,
+        "label": "Other Skill Stream",
+        "show_label": false,
+        "label_y": 341.0580933017375,
+        "value_y": 366.5580933017375
+      },
+      {
+        "id": "17",
+        "parent": "16",
+        "name": "Partner",
+        "group": "Family Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Family Stream Visas > Partner",
+        "places": 40500,
+        "share": 0.13144741454295247,
+        "x0": 756.1309670634971,
+        "x1": 927.6714658496371,
+        "y0": 0,
+        "y1": 498.0795792102624,
+        "cx": 841.9012164565671,
+        "cy": 249.0397896051312,
+        "label": "Partner",
+        "show_label": true,
+        "label_y": 239.0397896051312,
+        "value_y": 264.5397896051312
+      },
+      {
+        "id": "18",
+        "parent": "16",
+        "name": "Parent",
+        "group": "Family Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Family Stream Visas > Parent",
+        "places": 8500,
+        "share": 0.027587728978150518,
+        "x0": 756.1309670634971,
+        "x1": 877.6388203703463,
+        "y0": 498.0795792102624,
+        "y1": 645.6587137910809,
+        "cx": 816.8848937169216,
+        "cy": 571.8691465006716,
+        "label": "Parent",
+        "show_label": true,
+        "label_y": 561.8691465006716,
+        "value_y": 587.3691465006716
+      },
+      {
+        "id": "19",
+        "parent": "16",
+        "name": "Child",
+        "group": "Family Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Family Stream Visas > Child",
+        "places": 3000,
+        "share": 0.009736845521700182,
+        "x0": 877.6388203703463,
+        "x1": 927.6714658496371,
+        "y0": 498.0795792102624,
+        "y1": 624.5759802795354,
+        "cx": 902.6551431099917,
+        "cy": 561.3277797448989,
+        "label": "Child",
+        "show_label": false,
+        "label_y": 551.3277797448989,
+        "value_y": 576.8277797448989
+      },
+      {
+        "id": "20",
+        "parent": "16",
+        "name": "Other Family",
+        "group": "Family Stream Visas",
+        "path": "Permanent Migrant Visas > Migration Program > Family Stream Visas > Other Family",
+        "places": 500,
+        "share": 0.0016228075869500304,
+        "x0": 877.6388203703463,
+        "x1": 927.6714658496371,
+        "y0": 624.5759802795354,
+        "y1": 645.6587137910809,
+        "cx": 902.6551431099917,
+        "cy": 635.1173470353082,
+        "label": "Other\nFamily",
+        "show_label": false,
+        "label_y": 625.1173470353082,
+        "value_y": 658.1173470353082
+      },
+      {
+        "id": "21",
+        "parent": "9",
+        "name": "Special Eligibility",
+        "group": "Special Eligibility",
+        "path": "Permanent Migrant Visas > Migration Program > Special Eligibility",
+        "places": 353,
+        "share": 0.0011457021563867215,
+        "x0": 756.1309670634971,
+        "x1": 927.6714658496371,
+        "y0": 645.6587137910809,
+        "y1": 650,
+        "cx": 841.9012164565671,
+        "cy": 647.8293568955405,
+        "label": "Special Eligibility",
+        "show_label": false,
+        "label_y": 637.8293568955405,
+        "value_y": 663.3293568955405
+      },
+      {
+        "id": "23",
+        "parent": "22",
+        "name": "Temporary Resident (Skilled)",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Temporary Resident (Skilled)",
+        "places": 29349,
+        "share": 0.09525555973879289,
+        "x0": 0,
+        "x1": 436.7389472407501,
+        "y0": 368.1426793149332,
+        "y1": 509.9118396368874,
+        "cx": 218.36947362037506,
+        "cy": 439.02725947591034,
+        "label": "Temporary Resident (Skilled)",
+        "show_label": true,
+        "label_y": 429.02725947591034,
+        "value_y": 454.52725947591034
+      },
+      {
+        "id": "24",
+        "parent": "22",
+        "name": "Temporary Graduate",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Temporary Graduate",
+        "places": 29001,
+        "share": 0.09412608565827567,
+        "x0": 0,
+        "x1": 436.7389472407501,
+        "y0": 509.9118396368874,
+        "y1": 650,
+        "cx": 218.36947362037506,
+        "cy": 579.9559198184437,
+        "label": "Temporary Graduate",
+        "show_label": true,
+        "label_y": 569.9559198184437,
+        "value_y": 595.4559198184437
+      },
+      {
+        "id": "25",
+        "parent": "22",
+        "name": "Student",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Student",
+        "places": 12637,
+        "share": 0.04101483895257507,
+        "x0": 436.7389472407501,
+        "x1": 625.59579585735,
+        "y0": 368.1426793149332,
+        "y1": 509.30592287458717,
+        "cx": 531.1673715490501,
+        "cy": 438.7243010947602,
+        "label": "Student",
+        "show_label": true,
+        "label_y": 428.7243010947602,
+        "value_y": 454.2243010947602
+      },
+      {
+        "id": "26",
+        "parent": "22",
+        "name": "Temporary Activity",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Temporary Activity",
+        "places": 12595,
+        "share": 0.04087852311527127,
+        "x0": 436.7389472407501,
+        "x1": 625.59579585735,
+        "y0": 509.30592287458717,
+        "y1": 650,
+        "cx": 531.1673715490501,
+        "cy": 579.6529614372936,
+        "label": "Temporary Activity",
+        "show_label": true,
+        "label_y": 569.6529614372936,
+        "value_y": 595.1529614372936
+      },
+      {
+        "id": "27",
+        "parent": "22",
+        "name": "Visitor",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Visitor",
+        "places": 11211,
+        "share": 0.03638659171459358,
+        "x0": 625.59579585735,
+        "x1": 756.1309670634971,
+        "y0": 368.1426793149332,
+        "y1": 549.3297448080688,
+        "cx": 690.8633814604236,
+        "cy": 458.73621206150096,
+        "label": "Visitor",
+        "show_label": true,
+        "label_y": 448.73621206150096,
+        "value_y": 474.23621206150096
+      },
+      {
+        "id": "28",
+        "parent": "22",
+        "name": "Working Holiday Maker",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Working Holiday Maker",
+        "places": 3060,
+        "share": 0.009931582432134187,
+        "x0": 625.59579585735,
+        "x1": 756.1309670634971,
+        "y0": 600.5456765311752,
+        "y1": 650,
+        "cx": 690.8633814604236,
+        "cy": 625.2728382655876,
+        "label": "Working Holiday\nMaker",
+        "show_label": false,
+        "label_y": 615.2728382655876,
+        "value_y": 648.2728382655876
+      },
+      {
+        "id": "29",
+        "parent": "22",
+        "name": "Other",
+        "group": "Change of Status",
+        "path": "Permanent Migrant Visas > Migration Program > Change of Status > Other",
+        "places": 3169,
+        "share": 0.010285354486089294,
+        "x0": 625.59579585735,
+        "x1": 756.1309670634971,
+        "y0": 549.3297448080688,
+        "y1": 600.5456765311752,
+        "cx": 690.8633814604236,
+        "cy": 574.937710669622,
+        "label": "Other",
+        "show_label": true,
+        "label_y": 564.937710669622,
+        "value_y": 590.437710669622
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#faf8f5",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "x0",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "x2": {
+          "field": "x1"
+        },
+        "y": {
+          "field": "y0",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "y2": {
+          "field": "y1"
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Skill Stream Visas",
+              "Family Stream Visas",
+              "Change of Status",
+              "Humanitarian Program",
+              "Special Eligibility"
+            ],
+            "range": [
+              "#b83436",
+              "#dc8452",
+              "#536c8b",
+              "#3f8577",
+              "#8f719b"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "bottom",
+            "columns": 3,
+            "labelLimit": 240,
+            "symbolType": "square"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "places",
+            "type": "quantitative",
+            "title": "Places",
+            "format": ","
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of supplied leaf counts",
+            "format": ".1%"
+          },
+          {
+            "field": "path",
+            "type": "nominal",
+            "title": "Hierarchy"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.show_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "white",
+        "lineBreak": "\n",
+        "lineHeight": 15,
+        "align": "center",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "y": {
+          "field": "label_y",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "text": {
+          "field": "label"
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "places",
+            "type": "quantitative",
+            "title": "Places",
+            "format": ","
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of supplied leaf counts",
+            "format": ".1%"
+          },
+          {
+            "field": "path",
+            "type": "nominal",
+            "title": "Hierarchy"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.show_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "color": "white",
+        "align": "center",
+        "baseline": "middle"
+      },
+      "encoding": {
+        "x": {
+          "field": "cx",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "y": {
+          "field": "value_y",
+          "type": "quantitative",
+          "scale": null,
+          "axis": null
+        },
+        "text": {
+          "field": "places",
+          "type": "quantitative",
+          "format": ","
+        },
+        "tooltip": [
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "places",
+            "type": "quantitative",
+            "title": "Places",
+            "format": ","
+          },
+          {
+            "field": "share",
+            "type": "quantitative",
+            "title": "Share of supplied leaf counts",
+            "format": ".1%"
+          },
+          {
+            "field": "path",
+            "type": "nominal",
+            "title": "Hierarchy"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "legend": {
+      "labelFontSize": 12,
+      "padding": 14
+    }
+  }
+}

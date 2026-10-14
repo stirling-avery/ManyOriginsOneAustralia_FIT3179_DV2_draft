@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heatmap of the year-on-year percentage change in the Australian resident population born in each of the top 20 overseas countries of birth, 1997 to 2025.",
+  "title": {
+    "text": "Year-on-year growth in Australia's overseas-born population, by country of birth",
+    "subtitle": "Top 20 countries of birth in 2025, ordered by 2025 population. Orange = grew, blue = shrank; colour is capped at +25% (see tooltip for exact values)",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "country_year_pct_change_top20.csv"
+  },
+  "width": {
+    "step": 20
+  },
+  "height": {
+    "step": 22
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 0.5,
+    "tooltip": true
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year (change from 30 June of the previous year)",
+      "axis": {
+        "values": [
+          1997,
+          2000,
+          2005,
+          2010,
+          2015,
+          2020,
+          2025
+        ],
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "country",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "rank_2025",
+        "op": "min"
+      }
+    },
+    "color": {
+      "field": "pct_change",
+      "type": "quantitative",
+      "title": "Change on previous year (%)",
+      "scale": {
+        "scheme": "blueorange",
+        "domain": [
+          -10,
+          25
+        ],
+        "domainMid": 0,
+        "clamp": true
+      },
+      "legend": {
+        "orient": "right",
+        "values": [
+          -10,
+          -5,
+          0,
+          5,
+          10,
+          15,
+          20,
+          25
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "country",
+        "type": "nominal",
+        "title": "Country of birth"
+      },
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "pct_change",
+        "type": "quantitative",
+        "title": "Change on previous year (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "domain": false,
+      "ticks": false
+    }
+  }
+}

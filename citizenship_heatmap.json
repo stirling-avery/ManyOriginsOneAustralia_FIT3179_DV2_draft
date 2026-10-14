@@ -1,0 +1,274 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Heat map of citizenship by Migration Program visa category using the supplied citizenship_stream.csv. Values are embedded without changes. Citizenship rows are ordered by descending total places across the six supplied categories. Linear colour scale starts at zero. No reporting year was supplied.",
+  "width": 900,
+  "height": 280,
+  "padding": 20,
+  "background": "#fffdfb",
+  "title": {
+    "text": "Migration pathways by citizenship",
+    "subtitle": [
+      "Places across six visa categories • Darker red indicates more places",
+      "Citizenships ordered by total places in the supplied data"
+    ],
+    "anchor": "start",
+    "fontSize": 25,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#6b6561",
+    "offset": 20
+  },
+  "data": {
+    "values": [
+      {
+        "Citizenship": "China",
+        "Migration Program Visas": "Employer Sponsored",
+        "Places": 1509
+      },
+      {
+        "Citizenship": "China",
+        "Migration Program Visas": "State/Territory Nominated",
+        "Places": 3158
+      },
+      {
+        "Citizenship": "China",
+        "Migration Program Visas": "Regional",
+        "Places": 1101
+      },
+      {
+        "Citizenship": "China",
+        "Migration Program Visas": "Skilled Independent",
+        "Places": 2488
+      },
+      {
+        "Citizenship": "China",
+        "Migration Program Visas": "Global Talent",
+        "Places": 579
+      },
+      {
+        "Citizenship": "China",
+        "Migration Program Visas": "Family Stream",
+        "Places": 10972
+      },
+      {
+        "Citizenship": "India",
+        "Migration Program Visas": "Employer Sponsored",
+        "Places": 12762
+      },
+      {
+        "Citizenship": "India",
+        "Migration Program Visas": "State/Territory Nominated",
+        "Places": 11355
+      },
+      {
+        "Citizenship": "India",
+        "Migration Program Visas": "Regional",
+        "Places": 13193
+      },
+      {
+        "Citizenship": "India",
+        "Migration Program Visas": "Skilled Independent",
+        "Places": 5058
+      },
+      {
+        "Citizenship": "India",
+        "Migration Program Visas": "Global Talent",
+        "Places": 1244
+      },
+      {
+        "Citizenship": "India",
+        "Migration Program Visas": "Family Stream",
+        "Places": 4661
+      },
+      {
+        "Citizenship": "United Kingdom",
+        "Migration Program Visas": "Employer Sponsored",
+        "Places": 4650
+      },
+      {
+        "Citizenship": "United Kingdom",
+        "Migration Program Visas": "State/Territory Nominated",
+        "Places": 1602
+      },
+      {
+        "Citizenship": "United Kingdom",
+        "Migration Program Visas": "Regional",
+        "Places": 521
+      },
+      {
+        "Citizenship": "United Kingdom",
+        "Migration Program Visas": "Skilled Independent",
+        "Places": 1084
+      },
+      {
+        "Citizenship": "United Kingdom",
+        "Migration Program Visas": "Global Talent",
+        "Places": 124
+      },
+      {
+        "Citizenship": "United Kingdom",
+        "Migration Program Visas": "Family Stream",
+        "Places": 2151
+      },
+      {
+        "Citizenship": "Pakistan",
+        "Migration Program Visas": "Employer Sponsored",
+        "Places": 823
+      },
+      {
+        "Citizenship": "Pakistan",
+        "Migration Program Visas": "State/Territory Nominated",
+        "Places": 2404
+      },
+      {
+        "Citizenship": "Pakistan",
+        "Migration Program Visas": "Regional",
+        "Places": 2881
+      },
+      {
+        "Citizenship": "Pakistan",
+        "Migration Program Visas": "Skilled Independent",
+        "Places": 757
+      },
+      {
+        "Citizenship": "Pakistan",
+        "Migration Program Visas": "Global Talent",
+        "Places": 192
+      },
+      {
+        "Citizenship": "Pakistan",
+        "Migration Program Visas": "Family Stream",
+        "Places": 2463
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "Migration Program Visas",
+      "type": "nominal",
+      "sort": [
+        "Employer Sponsored",
+        "State/Territory Nominated",
+        "Regional",
+        "Skilled Independent",
+        "Global Talent",
+        "Family Stream"
+      ],
+      "title": null,
+      "axis": {
+        "labelAngle": -25,
+        "labelLimit": 230,
+        "labelPadding": 12,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "y": {
+      "field": "Citizenship",
+      "type": "nominal",
+      "sort": [
+        "India",
+        "China",
+        "United Kingdom",
+        "Pakistan"
+      ],
+      "title": null,
+      "axis": {
+        "labelPadding": 12,
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Citizenship",
+        "type": "nominal"
+      },
+      {
+        "field": "Migration Program Visas",
+        "type": "nominal",
+        "title": "Visa category"
+      },
+      {
+        "field": "Places",
+        "type": "quantitative",
+        "format": ","
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fffdfb",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "Places",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              13193
+            ],
+            "range": [
+              "#fff0e8",
+              "#ef8a62",
+              "#b2182b",
+              "#67001f"
+            ]
+          },
+          "legend": {
+            "title": "Places",
+            "orient": "right",
+            "gradientLength": 220,
+            "format": ",.0f",
+            "values": [
+              0,
+              3000,
+              6000,
+              9000,
+              12000
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 15,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "field": "Places",
+          "type": "quantitative",
+          "format": ","
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Places >= 6000",
+            "value": "#ffffff"
+          },
+          "value": "#37201c"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 13,
+      "grid": false
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 13
+    }
+  }
+}

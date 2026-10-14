@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Many Origins, One Australia</title>
+
+  <!-- Fonts (Google Fonts). Fallback stacks are set in the CSS below. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Vega, Vega-Lite and Vega-Embed (pinned versions) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+
+  <style>
+    :root {
+      /* Colours */
+      --rim: #6a7d90;          /* darker blue/grey outer rims */
+      --paper: #eaf3fb;        /* very pale blue centre column */
+      --ink: #1c2a39;          /* main text */
+      --ink-soft: #4a5b6c;     /* secondary text */
+
+      /* Layout: the pale column covers roughly 40-50% of a wide screen,
+         but never gets narrower than 880px so the charts stay readable. */
+      --content-width: clamp(880px, 48vw, 1100px);
+      --pad: 2.5rem;           /* inner padding of the pale column */
+      --gap: 1.5rem;           /* space between boxes */
+      --row-gap: 2.75rem;      /* space between rows */
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--rim);
+      color: var(--ink);
+      font-family: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    /* ---------- The pale centre column ---------- */
+    .page {
+      width: var(--content-width);
+      max-width: 100%;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 2.25rem var(--pad) 3rem;
+      background: var(--paper);
+    }
+
+    /* ---------- Header: title left, author block right ---------- */
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--gap);
+      margin-bottom: var(--row-gap);
+    }
+
+    .site-header h1 {
+      margin: 0;
+      font-family: "Fraunces", Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .author {
+      margin: 0;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      text-align: right;
+      color: var(--ink-soft);
+      white-space: nowrap;
+    }
+
+    /* ---------- Rows ---------- */
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      align-items: stretch;      /* text boxes match the height of the chart beside them */
+      margin-bottom: var(--row-gap);
+    }
+
+    .row.full {
+      grid-template-columns: 1fr;
+    }
+
+    /* Row variants */
+    .row--wide-left   { grid-template-columns: 1.7fr 1fr; }  /* radial chart wider, text narrower */
+    .row--two-thirds  { grid-template-columns: 2fr 1fr; }    /* line chart = 2/3, text = 1/3 */
+    .row--tight       { margin-bottom: 1.25rem; }            /* hex map sits close to its text */
+
+    /* ---------- Chart boxes ---------- */
+    .chart {
+      width: 100%;
+      min-width: 0;              /* lets the grid cell shrink below the chart's natural width */
+      min-height: 200px;
+      overflow: hidden;          /* charts are scaled to fit, so no scroll bars */
+    }
+
+    .chart .vega-embed {
+      display: block;
+      width: 100%;
+    }
+
+    /* Each chart's SVG is scaled by the script below. By default it can
+       shrink to fit its box but never grows past its natural size
+       (the script sets max-width). Charts marked data-fit="fill" grow too. */
+    .chart svg {
+      display: block;
+      margin: 0 auto;
+      height: auto;
+    }
+
+    .chart-error {
+      margin: 0;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #7a2a2a;
+    }
+
+    /* ---------- Text boxes (left empty on purpose) ---------- */
+    .text-box {
+      min-height: 340px;
+      font-size: 1.05rem;
+      line-height: 1.65;
+    }
+
+    /* Short, wide text boxes that sit between charts */
+    .text-box--short {
+      min-height: 90px;
+    }
+
+    .text-box p { margin: 0 0 1rem; }
+
+    /* ---------- Bibliography ---------- */
+    .bibliography h2 {
+      margin: 0 0 0.75rem;
+      font-family: "Fraunces", Georgia, "Times New Roman", serif;
+      font-size: 1.4rem;
+    }
+
+    .bibliography ol {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Narrow screens: stack everything ---------- */
+    @media (max-width: 940px) {
+      :root { --pad: 1.25rem; }
+      .row,
+      .row--wide-left,
+      .row--two-thirds { grid-template-columns: 1fr; }
+      .text-box { min-height: 0; }
+      .author { white-space: normal; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+
+    <!-- ===== Header ===== -->
+    <header class="site-header">
+      <h1>Many Origins, One Australia</h1>
+      <p class="author">
+        Stirling Avery<br>
+        36179418<br>
+        14/10/2026
+      </p>
+    </header>
+
+    <!-- ===== Row 1: text | waffle charts ===== -->
+    <section class="row">
+      <div class="text-box">
+        <!-- Write your text here -->
+      </div>
+      <div class="chart" data-spec="waffle_overseas_born.json"></div>
+    </section>
+
+    <!-- ===== Row 2: choropleth (full width, scaled to fit) ===== -->
+    <section class="row full">
+      <div class="chart" data-spec="choropleth_country_of_birth_top20.json"></div>
+    </section>
+
+    <!-- ===== Row 3: text (same width as the heatmap below) ===== -->
+    <section class="row full">
+      <div class="text-box text-box--short">
+        <!-- Write your text here -->
+      </div>
+    </section>
+
+    <!-- ===== Row 4: heatmap (full width, expands to fill) ===== -->
+    <section class="row full">
+      <div class="chart" data-fit="fill" data-spec="heatmap_country_year_pct_change.json"></div>
+    </section>
+
+    <!-- ===== Row 5: radial age chart (wider) | text (narrower) ===== -->
+    <section class="row row--wide-left">
+      <div class="chart" data-spec="age_clock_radial.json"></div>
+      <div class="text-box">
+        <!-- Write your text here -->
+      </div>
+    </section>
+
+    <!-- ===== Row 6: flow map (full width, scaled to fit) ===== -->
+    <section class="row full">
+      <div class="chart" data-spec="australia_flow_map.json"></div>
+    </section>
+
+    <!-- ===== Row 7: small text box ===== -->
+    <section class="row full">
+      <div class="text-box text-box--short">
+        <!-- Write your text here -->
+      </div>
+    </section>
+
+    <!-- ===== Row 8: treemap (full width) ===== -->
+    <section class="row full">
+      <div class="chart" data-spec="program_streams_treemap.json"></div>
+    </section>
+
+    <!-- ===== Row 9: citizenship heatmap (below the treemap) ===== -->
+    <section class="row full">
+      <div class="chart" data-spec="citizenship_heatmap.json"></div>
+    </section>
+
+    <!-- ===== Row 10: hex-tile cartogram (full width, expands to fill) ===== -->
+    <section class="row full row--tight">
+      <div class="chart" data-fit="fill" data-spec="state_hex_cartogram.json"></div>
+    </section>
+
+    <!-- ===== Row 11: text under the hex cartogram (short and wide) ===== -->
+    <section class="row full">
+      <div class="text-box text-box--short">
+        <!-- Write your text here -->
+      </div>
+    </section>
+
+    <!-- ===== Row 12: dot density map (full width, scaled to fit) ===== -->
+    <section class="row full">
+      <div class="chart" data-spec="capital_cities_dot_density.json"></div>
+    </section>
+
+    <!-- ===== Row 13: line chart (2/3 width) | text (remaining 1/3) ===== -->
+    <section class="row row--two-thirds">
+      <div class="chart" data-fit="fill" data-spec="migrant_departures_annual_line_chart.json"></div>
+      <div class="text-box">
+        <!-- Write your text here -->
+      </div>
+    </section>
+
+    <!-- ===== Row 14: bibliography (full width) ===== -->
+    <section class="row full">
+      <div class="bibliography">
+        <h2>Bibliography</h2>
+        <ol>
+          <!-- <li>Add each source here (author, title, URL, date accessed).</li> -->
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Folder that holds the JSON files, relative to this page.
+    // Leave as "" if they sit next to index.html, or use e.g. "specs/".
+    const SPEC_DIR = "";
+
+    // Scales a chart's SVG so it fits its box without a scroll bar.
+    // Default: shrinks to fit, never grows beyond its natural size.
+    // data-fit="fill": also grows to fill the box width.
+    function fitChart(el) {
+      const svg = el.querySelector("svg");
+      if (!svg) return;
+      const w = parseFloat(svg.getAttribute("width"));
+      const h = parseFloat(svg.getAttribute("height"));
+      if (!w || !h) return;
+      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
+      svg.style.width = "100%";
+      svg.style.maxWidth = el.dataset.fit === "fill" ? "none" : w + "px";
+      svg.style.height = "auto";
+    }
+
+    // Every element with a data-spec attribute loads that Vega-Lite file.
+    document.querySelectorAll(".chart[data-spec]").forEach((el) => {
+      const url = SPEC_DIR + el.dataset.spec;
+
+      vegaEmbed(el, url, {
+        actions: false,                 // hide the "..." export menu
+        renderer: "svg",
+        config: { background: "transparent" }   // lets the pale blue show through
+      }).then(() => {
+        fitChart(el);
+      }).catch((err) => {
+        console.error("Could not load " + url, err);
+        el.innerHTML =
+          '<p class="chart-error">Could not load <code>' + url + "</code>. " +
+          "Check the file name and that the page is served from a web server " +
+          "(GitHub Pages or <code>python -m http.server</code>), not opened as a file.</p>";
+      });
+    });
+  </script>
+</body>
+</html>

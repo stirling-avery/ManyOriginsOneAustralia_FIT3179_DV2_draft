@@ -1,0 +1,9 @@
+state_code,state,hex_x,hex_y,nom_2024_25,est_pop_june_2025,nom_per_1000,year
+NT,Northern Territory,1,0,3610,264400,13.7,2025
+QLD,Queensland,2,0,55740,5669800,9.8,2025
+WA,Western Australia,0.5,1,40410,3043700,13.3,2025
+SA,South Australia,1.5,1,18730,1902300,9.8,2025
+NSW,New South Wales,2.5,1,91570,8593900,10.7,2025
+VIC,Victoria,2,2,87770,7074500,12.4,2025
+ACT,Australian Capital Territory,3,2,4980,484800,10.3,2025
+TAS,Tasmania,2.5,3,2720,576000,4.7,2025

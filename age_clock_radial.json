@@ -1,0 +1,229 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Radial (polar area) chart called the age clock. Nineteen age-group wedges run clockwise from 0-4 at the top to 90+, and each wedge's length shows the percentage of that age group born overseas.",
+  "title": {
+    "text": "The age clock: share of each age group born overseas",
+    "subtitle": "Age groups run clockwise from 0-4 at the top to 90+; longer wedge = higher % born overseas",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "pct_born_overseas_age.csv"
+  },
+  "width": 460,
+  "height": 460,
+  "layer": [
+    {
+      "data": {
+        "values": [
+          {
+            "r": 10
+          },
+          {
+            "r": 20
+          },
+          {
+            "r": 30
+          },
+          {
+            "r": 40
+          }
+        ]
+      },
+      "mark": {
+        "type": "arc",
+        "fill": null,
+        "stroke": "#bdbdbd",
+        "strokeWidth": 0.8,
+        "strokeDash": [
+          3,
+          3
+        ]
+      },
+      "encoding": {
+        "theta": {
+          "value": 0
+        },
+        "theta2": {
+          "value": 6.283185307
+        },
+        "radius": {
+          "field": "r",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              50
+            ],
+            "range": [
+              0,
+              180
+            ]
+          }
+        },
+        "radius2": {
+          "field": "r"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "(datum.age_order - 1) * 6.283185307 / 19",
+          "as": "theta_start"
+        },
+        {
+          "calculate": "datum.age_order * 6.283185307 / 19",
+          "as": "theta_end"
+        }
+      ],
+      "mark": {
+        "type": "arc",
+        "stroke": "#ffffff",
+        "strokeWidth": 1,
+        "tooltip": true
+      },
+      "encoding": {
+        "theta": {
+          "field": "theta_start",
+          "type": "quantitative",
+          "scale": null
+        },
+        "radius": {
+          "field": "pct_overseas_born",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              50
+            ],
+            "range": [
+              0,
+              180
+            ]
+          }
+        },
+        "color": {
+          "field": "pct_overseas_born",
+          "type": "quantitative",
+          "title": "% born overseas",
+          "scale": {
+            "scheme": "oranges",
+            "domain": [
+              0,
+              50
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 250
+          }
+        },
+        "tooltip": [
+          {
+            "field": "age_group",
+            "type": "nominal",
+            "title": "Age group"
+          },
+          {
+            "field": "pct_overseas_born",
+            "type": "quantitative",
+            "title": "% born overseas"
+          }
+        ],
+        "theta2": {
+          "field": "theta_end"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "calculate": "(datum.age_order - 0.5) * 6.283185307 / 19",
+          "as": "theta_mid"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "#333333"
+      },
+      "encoding": {
+        "text": {
+          "field": "age_group",
+          "type": "nominal"
+        },
+        "theta": {
+          "field": "theta_mid",
+          "type": "quantitative",
+          "scale": null
+        },
+        "radius": {
+          "value": 203
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "r": 10,
+            "label": "10%"
+          },
+          {
+            "r": 20,
+            "label": "20%"
+          },
+          {
+            "r": 30,
+            "label": "30%"
+          },
+          {
+            "r": 40,
+            "label": "40%"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "align": "left",
+        "dx": 4,
+        "dy": -2,
+        "fill": "#333333"
+      },
+      "encoding": {
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "theta": {
+          "value": 0
+        },
+        "radius": {
+          "field": "r",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              50
+            ],
+            "range": [
+              0,
+              180
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

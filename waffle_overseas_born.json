@@ -1,0 +1,119 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Four waffle charts showing the percentage of Australia's population born overseas in 1905, 1945, 1985 and 2025.",
+  "title": {
+    "text": "Share of Australia's population born overseas",
+    "subtitle": "Each waffle chart has 100 squares; 1 square = 1% of the population (rounded to the nearest whole square)",
+    "anchor": "start"
+  },
+  "data": {
+    "url": "overseas_born_share_history.csv"
+  },
+  "transform": [
+    {
+      "calculate": "sequence(100)",
+      "as": "cells"
+    },
+    {
+      "flatten": [
+        "cells"
+      ],
+      "as": [
+        "index"
+      ]
+    },
+    {
+      "calculate": "datum.index % 10",
+      "as": "col"
+    },
+    {
+      "calculate": "floor(datum.index / 10)",
+      "as": "row"
+    },
+    {
+      "calculate": "datum.index < round(datum.pct_overseas_born) ? 'Born overseas' : 'Born in Australia'",
+      "as": "birthplace"
+    },
+    {
+      "calculate": "datum.year + ' : ' + datum.pct_overseas_born + '%'",
+      "as": "panel_label"
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "tooltip": true
+  },
+  "width": 180,
+  "height": 180,
+  "encoding": {
+    "facet": {
+      "field": "panel_label",
+      "type": "nominal",
+      "columns": 2,
+      "sort": {
+        "field": "year",
+        "op": "min"
+      },
+      "title": null,
+      "header": {
+        "labelFontSize": 16,
+        "labelFontWeight": "bold",
+        "labelOrient": "top"
+      }
+    },
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null,
+      "scale": {
+        "paddingInner": 0.1,
+        "paddingOuter": 0
+      }
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "sort": "descending",
+      "scale": {
+        "paddingInner": 0.1,
+        "paddingOuter": 0
+      }
+    },
+    "color": {
+      "field": "birthplace",
+      "type": "nominal",
+      "title": "Place of birth",
+      "scale": {
+        "domain": [
+          "Born overseas",
+          "Born in Australia"
+        ],
+        "range": [
+          "#d95f02",
+          "#d9d9d9"
+        ]
+      },
+      "legend": {
+        "orient": "bottom"
+      }
+    },
+    "tooltip": [
+      {
+        "field": "year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "pct_overseas_born",
+        "type": "quantitative",
+        "title": "% born overseas"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

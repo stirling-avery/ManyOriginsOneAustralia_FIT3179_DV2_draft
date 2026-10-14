@@ -1,0 +1,253 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Equal-sized hex tile cartogram using the eight states/territories and grid positions in state_hex_nom.csv. Colour encodes supplied net overseas migration for 2024–25; tile area does not encode population or geographic area. Input values are preserved and have not been independently verified. Positions are schematic, not exact geography.",
+  "width": 660,
+  "height": 610,
+  "padding": 20,
+  "background": "#fffdf9",
+  "title": {
+    "text": "Where overseas migration adds to Australia",
+    "subtitle": [
+      "Net overseas migration by state and territory, 2024–25",
+      "Equal-sized tiles • Darker red indicates more people • Hover for population and rates"
+    ],
+    "anchor": "start",
+    "fontSize": 24,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#6f625c",
+    "offset": 18
+  },
+  "data": {
+    "values": [
+      {
+        "state_code": "NT",
+        "state": "Northern Territory",
+        "hex_x": 1.0,
+        "hex_y": 0.0,
+        "nom_2024_25": 3610,
+        "est_pop_june_2025": 264400,
+        "nom_per_1000": 13.7,
+        "year": 2025
+      },
+      {
+        "state_code": "QLD",
+        "state": "Queensland",
+        "hex_x": 2.0,
+        "hex_y": 0.0,
+        "nom_2024_25": 55740,
+        "est_pop_june_2025": 5669800,
+        "nom_per_1000": 9.8,
+        "year": 2025
+      },
+      {
+        "state_code": "WA",
+        "state": "Western Australia",
+        "hex_x": 0.5,
+        "hex_y": 1.0,
+        "nom_2024_25": 40410,
+        "est_pop_june_2025": 3043700,
+        "nom_per_1000": 13.3,
+        "year": 2025
+      },
+      {
+        "state_code": "SA",
+        "state": "South Australia",
+        "hex_x": 1.5,
+        "hex_y": 1.0,
+        "nom_2024_25": 18730,
+        "est_pop_june_2025": 1902300,
+        "nom_per_1000": 9.8,
+        "year": 2025
+      },
+      {
+        "state_code": "NSW",
+        "state": "New South Wales",
+        "hex_x": 2.5,
+        "hex_y": 1.0,
+        "nom_2024_25": 91570,
+        "est_pop_june_2025": 8593900,
+        "nom_per_1000": 10.7,
+        "year": 2025
+      },
+      {
+        "state_code": "VIC",
+        "state": "Victoria",
+        "hex_x": 2.0,
+        "hex_y": 2.0,
+        "nom_2024_25": 87770,
+        "est_pop_june_2025": 7074500,
+        "nom_per_1000": 12.4,
+        "year": 2025
+      },
+      {
+        "state_code": "ACT",
+        "state": "Australian Capital Territory",
+        "hex_x": 3.0,
+        "hex_y": 2.0,
+        "nom_2024_25": 4980,
+        "est_pop_june_2025": 484800,
+        "nom_per_1000": 10.3,
+        "year": 2025
+      },
+      {
+        "state_code": "TAS",
+        "state": "Tasmania",
+        "hex_x": 2.5,
+        "hex_y": 3.0,
+        "nom_2024_25": 2720,
+        "est_pop_june_2025": 576000,
+        "nom_per_1000": 4.7,
+        "year": 2025
+      }
+    ]
+  },
+  "transform": [
+    {
+      "calculate": "75 + datum.hex_x * 155.8845726812",
+      "as": "tile_x"
+    },
+    {
+      "calculate": "100 + datum.hex_y * 135",
+      "as": "tile_y"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "tile_x",
+      "type": "quantitative",
+      "scale": null,
+      "axis": null
+    },
+    "y": {
+      "field": "tile_y",
+      "type": "quantitative",
+      "scale": null,
+      "axis": null
+    },
+    "tooltip": [
+      {
+        "field": "state",
+        "type": "nominal",
+        "title": "State / territory"
+      },
+      {
+        "field": "nom_2024_25",
+        "type": "quantitative",
+        "title": "Net overseas migration, 2024–25",
+        "format": ",.0f"
+      },
+      {
+        "field": "est_pop_june_2025",
+        "type": "quantitative",
+        "title": "Estimated population, June 2025",
+        "format": ",.0f"
+      },
+      {
+        "field": "nom_per_1000",
+        "type": "quantitative",
+        "title": "NOM per 1,000 residents",
+        "format": ".1f"
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "opacity": 1,
+        "shape": "M0,-1L0.8660254,-0.5L0.8660254,0.5L0,1L-0.8660254,0.5L-0.8660254,-0.5Z",
+        "size": 28900,
+        "stroke": "#fffdf9",
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "color": {
+          "field": "nom_2024_25",
+          "type": "quantitative",
+          "scale": {
+            "type": "linear",
+            "domain": [
+              0,
+              100000
+            ],
+            "range": [
+              "#fff0e8",
+              "#ef8a62",
+              "#b2182b",
+              "#67001f"
+            ]
+          },
+          "legend": {
+            "title": "Net overseas migration (people)",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 440,
+            "gradientThickness": 15,
+            "format": ",.0f",
+            "values": [
+              0,
+              20000,
+              40000,
+              60000,
+              80000,
+              100000
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 23,
+        "fontWeight": "bold",
+        "dy": -14
+      },
+      "encoding": {
+        "text": {
+          "field": "state_code"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.nom_2024_25 >= 50000",
+            "value": "white"
+          },
+          "value": "#44251e"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 18,
+        "dy": 15
+      },
+      "encoding": {
+        "text": {
+          "field": "nom_2024_25",
+          "type": "quantitative",
+          "format": ",.0f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.nom_2024_25 >= 50000",
+            "value": "white"
+          },
+          "value": "#44251e"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "legend": {
+      "titleFontSize": 13,
+      "labelFontSize": 12,
+      "offset": 14
+    }
+  }
+}

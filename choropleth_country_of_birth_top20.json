@@ -1,0 +1,122 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "World choropleth map showing the twenty most common countries of birth of Australia's overseas-born population in 2025, coloured by population in thousands.",
+  "title": {
+    "text": "Where Australia's overseas-born population was born",
+    "subtitle": "Top 20 countries of birth, 2025. Colour shows population ('000); grey = not in the top 20",
+    "anchor": "start"
+  },
+  "width": 900,
+  "height": 470,
+  "projection": {
+    "type": "equalEarth"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2/data/world-110m.json",
+        "format": {
+          "type": "topojson",
+          "feature": "countries"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.id != 10"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e5e5e5",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.4
+      }
+    },
+    {
+      "data": {
+        "url": "country_of_birth_top20.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "iso_numeric": "number"
+          }
+        }
+      },
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "population",
+              "as": "population"
+            }
+          ],
+          "groupby": [
+            "iso_numeric",
+            "map_label"
+          ]
+        },
+        {
+          "lookup": "iso_numeric",
+          "from": {
+            "data": {
+              "url": "https://cdn.jsdelivr.net/npm/vega-datasets@2/data/world-110m.json",
+              "format": {
+                "type": "topojson",
+                "feature": "countries"
+              }
+            },
+            "key": "id"
+          },
+          "as": "geo"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "population",
+          "type": "quantitative",
+          "title": "Overseas-born population ('000)",
+          "scale": {
+            "scheme": "oranges",
+            "domain": [
+              100,
+              1100
+            ]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "gradientLength": 300
+          }
+        },
+        "tooltip": [
+          {
+            "field": "map_label",
+            "type": "nominal",
+            "title": "Country of birth"
+          },
+          {
+            "field": "population",
+            "type": "quantitative",
+            "title": "Population ('000)",
+            "format": ",.2f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

@@ -1,0 +1,421 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Calendar-year migrant departures by country of birth for 2015–2024. Each value is the original December year-ending observation converted from thousands to people. Quarterly year-ending observations are not summed. 2025 is excluded because no December observation is available.",
+  "width": 960,
+  "height": 480,
+  "padding": 20,
+  "background": "#fffdf9",
+  "title": {
+    "text": "Migrant departures by country of birth",
+    "subtitle": [
+      "Calendar-year totals, 2015–2024 • Departures by country of birth",
+      "Click a legend entry to highlight a country; Shift-click to select several; double-click the chart to reset."
+    ],
+    "anchor": "start",
+    "fontSize": 25,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#6b625b",
+    "offset": 20
+  },
+  "data": {
+    "values": [
+      {
+        "year": 2015,
+        "country_of_birth": "Australia",
+        "departures_people": 71180
+      },
+      {
+        "year": 2015,
+        "country_of_birth": "China",
+        "departures_people": 24020
+      },
+      {
+        "year": 2015,
+        "country_of_birth": "India",
+        "departures_people": 11410
+      },
+      {
+        "year": 2015,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 24450
+      },
+      {
+        "year": 2015,
+        "country_of_birth": "New Zealand",
+        "departures_people": 22900
+      },
+      {
+        "year": 2016,
+        "country_of_birth": "Australia",
+        "departures_people": 68400
+      },
+      {
+        "year": 2016,
+        "country_of_birth": "China",
+        "departures_people": 26160
+      },
+      {
+        "year": 2016,
+        "country_of_birth": "India",
+        "departures_people": 10690
+      },
+      {
+        "year": 2016,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 22730
+      },
+      {
+        "year": 2016,
+        "country_of_birth": "New Zealand",
+        "departures_people": 21810
+      },
+      {
+        "year": 2017,
+        "country_of_birth": "Australia",
+        "departures_people": 66870
+      },
+      {
+        "year": 2017,
+        "country_of_birth": "China",
+        "departures_people": 34270
+      },
+      {
+        "year": 2017,
+        "country_of_birth": "India",
+        "departures_people": 11230
+      },
+      {
+        "year": 2017,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 22560
+      },
+      {
+        "year": 2017,
+        "country_of_birth": "New Zealand",
+        "departures_people": 19520
+      },
+      {
+        "year": 2018,
+        "country_of_birth": "Australia",
+        "departures_people": 62900
+      },
+      {
+        "year": 2018,
+        "country_of_birth": "China",
+        "departures_people": 40380
+      },
+      {
+        "year": 2018,
+        "country_of_birth": "India",
+        "departures_people": 11590
+      },
+      {
+        "year": 2018,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 20650
+      },
+      {
+        "year": 2018,
+        "country_of_birth": "New Zealand",
+        "departures_people": 16830
+      },
+      {
+        "year": 2019,
+        "country_of_birth": "Australia",
+        "departures_people": 59340
+      },
+      {
+        "year": 2019,
+        "country_of_birth": "China",
+        "departures_people": 84520
+      },
+      {
+        "year": 2019,
+        "country_of_birth": "India",
+        "departures_people": 16960
+      },
+      {
+        "year": 2019,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 22350
+      },
+      {
+        "year": 2019,
+        "country_of_birth": "New Zealand",
+        "departures_people": 18730
+      },
+      {
+        "year": 2020,
+        "country_of_birth": "Australia",
+        "departures_people": 29100
+      },
+      {
+        "year": 2020,
+        "country_of_birth": "China",
+        "departures_people": 55400
+      },
+      {
+        "year": 2020,
+        "country_of_birth": "India",
+        "departures_people": 20050
+      },
+      {
+        "year": 2020,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 12580
+      },
+      {
+        "year": 2020,
+        "country_of_birth": "New Zealand",
+        "departures_people": 13050
+      },
+      {
+        "year": 2021,
+        "country_of_birth": "Australia",
+        "departures_people": 33680
+      },
+      {
+        "year": 2021,
+        "country_of_birth": "China",
+        "departures_people": 45300
+      },
+      {
+        "year": 2021,
+        "country_of_birth": "India",
+        "departures_people": 21050
+      },
+      {
+        "year": 2021,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 11520
+      },
+      {
+        "year": 2021,
+        "country_of_birth": "New Zealand",
+        "departures_people": 10420
+      },
+      {
+        "year": 2022,
+        "country_of_birth": "Australia",
+        "departures_people": 58830
+      },
+      {
+        "year": 2022,
+        "country_of_birth": "China",
+        "departures_people": 18260
+      },
+      {
+        "year": 2022,
+        "country_of_birth": "India",
+        "departures_people": 17580
+      },
+      {
+        "year": 2022,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 13670
+      },
+      {
+        "year": 2022,
+        "country_of_birth": "New Zealand",
+        "departures_people": 14120
+      },
+      {
+        "year": 2023,
+        "country_of_birth": "Australia",
+        "departures_people": 58530
+      },
+      {
+        "year": 2023,
+        "country_of_birth": "China",
+        "departures_people": 28620
+      },
+      {
+        "year": 2023,
+        "country_of_birth": "India",
+        "departures_people": 13750
+      },
+      {
+        "year": 2023,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 12160
+      },
+      {
+        "year": 2023,
+        "country_of_birth": "New Zealand",
+        "departures_people": 10830
+      },
+      {
+        "year": 2024,
+        "country_of_birth": "Australia",
+        "departures_people": 57800
+      },
+      {
+        "year": 2024,
+        "country_of_birth": "China",
+        "departures_people": 33350
+      },
+      {
+        "year": 2024,
+        "country_of_birth": "India",
+        "departures_people": 17320
+      },
+      {
+        "year": 2024,
+        "country_of_birth": "United Kingdom",
+        "departures_people": 15020
+      },
+      {
+        "year": 2024,
+        "country_of_birth": "New Zealand",
+        "departures_people": 10860
+      }
+    ]
+  },
+  "params": [
+    {
+      "name": "country_select",
+      "select": {
+        "type": "point",
+        "fields": [
+          "country_of_birth"
+        ]
+      },
+      "bind": "legend"
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "strokeWidth": 2.8,
+    "interpolate": "linear",
+    "point": {
+      "filled": true,
+      "size": 20
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Year",
+      "scale": {
+        "domain": [
+          2015,
+          2024
+        ],
+        "nice": false,
+        "zero": false
+      },
+      "axis": {
+        "format": "d",
+        "values": [
+          2015,
+          2016,
+          2017,
+          2018,
+          2019,
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ],
+        "labelAngle": 0,
+        "grid": false,
+        "labelPadding": 8
+      }
+    },
+    "y": {
+      "field": "departures_people",
+      "type": "quantitative",
+      "title": "Migrant departures (people)",
+      "scale": {
+        "zero": true,
+        "domain": [
+          0,
+          100000
+        ]
+      },
+      "axis": {
+        "format": ",.0f",
+        "tickCount": 6,
+        "gridColor": "#e7e1d9",
+        "domain": false,
+        "tickSize": 0,
+        "labelPadding": 8
+      }
+    },
+    "color": {
+      "field": "country_of_birth",
+      "type": "nominal",
+      "title": "Country of birth",
+      "scale": {
+        "domain": [
+          "Australia",
+          "China",
+          "India",
+          "United Kingdom",
+          "New Zealand"
+        ],
+        "range": [
+          "#353535",
+          "#c52d37",
+          "#ce7800",
+          "#6c4b9e",
+          "#168575"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "columns": 5,
+        "symbolType": "stroke",
+        "symbolStrokeWidth": 3,
+        "labelFontSize": 12,
+        "titleFontSize": 12,
+        "labelLimit": 170,
+        "offset": 18
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "country_select",
+        "value": 1
+      },
+      "value": 0.15
+    },
+    "order": {
+      "field": "year",
+      "type": "quantitative"
+    },
+    "tooltip": [
+      {
+        "field": "country_of_birth",
+        "type": "nominal",
+        "title": "Country of birth"
+      },
+      {
+        "field": "year",
+        "type": "quantitative",
+        "title": "Calendar year",
+        "format": "d"
+      },
+      {
+        "field": "departures_people",
+        "type": "quantitative",
+        "title": "Migrant departures",
+        "format": ",.0f"
+      }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "font": "Arial",
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 13,
+      "titlePadding": 12
+    }
+  }
+}
