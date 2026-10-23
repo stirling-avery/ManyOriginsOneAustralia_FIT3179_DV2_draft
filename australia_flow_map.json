@@ -3,7 +3,7 @@
   "description": "Flow map of all 15 origins in the supplied flow_lines.csv. Places and year are reproduced as supplied, not independently verified. Routes are schematic great-circle connections between representative country coordinates, not travel paths. Embedded display names correct two spelling errors. Basemap: world-atlas countries-110m (Natural Earth).",
   "width": 1000,
   "height": 510,
-  "background": "#f7fafc",
+  "background": "#eaf3fb",
   "padding": 20,
   "title": {
     "text": "Bound for Australia",
@@ -38543,7 +38543,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#dce5eb",
+        "fill": "#bccad6",
         "stroke": "#ffffff",
         "strokeWidth": 0.6
       }
@@ -38604,17 +38604,7 @@
               14
             ]
           },
-          "legend": {
-            "title": "Places",
-            "orient": "bottom",
-            "values": [
-              5000,
-              20000,
-              50000
-            ],
-            "format": ",.0f",
-            "symbolStrokeColor": "#c62828"
-          }
+          "legend": null
         },
         "tooltip": [
           {
