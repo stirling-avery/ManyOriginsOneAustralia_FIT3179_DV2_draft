@@ -1,10 +1,23 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Radial (polar area) chart called the age clock. Nineteen age-group wedges run clockwise from 0-4 at the top to 90+, and each wedge's length shows the percentage of that age group born overseas.",
+  "background": "#eaf3fb",
+  "padding": 20,
   "title": {
-    "text": "The age clock: share of each age group born overseas",
-    "subtitle": "Age groups run clockwise from 0-4 at the top to 90+; longer wedge = higher % born overseas",
-    "anchor": "start"
+    "text": [
+      "The age clock: share of each",
+      "age group born overseas"
+    ],
+    "subtitle": [
+      "Age groups run clockwise from 0–4 at the top to 90+;",
+      "longer wedge = higher % born overseas"
+    ],
+    "anchor": "start",
+    "fontSize": 28,
+    "color": "#16324f",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#536678",
+    "offset": 20
   },
   "data": {
     "url": "pct_born_overseas_age.csv"
@@ -224,6 +237,23 @@
   "config": {
     "view": {
       "stroke": null
+    },
+    "font": "Arial",
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "padding": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#536678",
+      "titleColor": "#16324f"
+    },
+    "header": {
+      "labelFontSize": 16,
+      "labelFontWeight": "bold",
+      "labelColor": "#16324f"
     }
   }
 }

@@ -1,22 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Hierarchical treemap of supplied program_streams.csv. Layout computed using Vega stratify and squarify treemap, rendered using Vega-Lite rect marks. Leaf counts are preserved. Blank parent values are computed as descendant sums for layout only. Change of Status may overlap visa streams; total is a sum of supplied leaf counts, not a verified count of unique migrants. Recompute coordinates when counts change.",
-  "width": 1000,
-  "height": 650,
-  "padding": 20,
   "background": "#eaf3fb",
+  "padding": 20,
   "title": {
-    "text": "Pathways to permanent migration",
+    "text": [
+      "Pathways to permanent migration"
+    ],
     "subtitle": [
-      "Rectangle area represents supplied places \u2022 Colour identifies the major group",
-      "Change of Status is shown as supplied and may overlap visa streams; counts are not unique migrants."
+      "Rectangle area represents supplied places • Colour identifies the major group",
+      "Change of Status is shown as supplied and may overlap visa streams; counts are not unique migrants"
     ],
     "anchor": "start",
-    "fontSize": 25,
-    "subtitleFontSize": 12,
-    "subtitleColor": "#625e58",
-    "offset": 18
+    "fontSize": 28,
+    "color": "#16324f",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#536678",
+    "offset": 20
   },
+  "width": 1000,
+  "height": 650,
   "data": {
     "values": [
       {
@@ -689,7 +692,19 @@
     "font": "Arial",
     "legend": {
       "labelFontSize": 12,
-      "padding": 14
+      "padding": 10,
+      "titleFontSize": 12
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#536678",
+      "titleColor": "#16324f"
+    },
+    "header": {
+      "labelFontSize": 16,
+      "labelFontWeight": "bold",
+      "labelColor": "#16324f"
     }
   }
 }

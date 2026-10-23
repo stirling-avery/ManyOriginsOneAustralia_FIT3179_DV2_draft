@@ -1,10 +1,21 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "World choropleth map showing the twenty most common countries of birth of Australia's overseas-born population in 2025, coloured by population in thousands.",
+  "background": "#eaf3fb",
+  "padding": 20,
   "title": {
-    "text": "Where Australia's overseas-born population was born",
-    "subtitle": "Top 20 countries of birth, 2025. Colour shows population ('000); grey = not in the top 20",
-    "anchor": "start"
+    "text": [
+      "Where Australia's overseas-born population was born"
+    ],
+    "subtitle": [
+      "Top 20 countries of birth, 2025 • Colour shows population ('000); grey = not in the top 20"
+    ],
+    "anchor": "start",
+    "fontSize": 28,
+    "color": "#16324f",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#536678",
+    "offset": 20
   },
   "width": 900,
   "height": 470,
@@ -27,7 +38,7 @@
       ],
       "mark": {
         "type": "geoshape",
-        "fill": "#e5e5e5",
+        "fill": "#bccad6",
         "stroke": "#ffffff",
         "strokeWidth": 0.4
       }
@@ -117,6 +128,23 @@
   "config": {
     "view": {
       "stroke": null
+    },
+    "font": "Arial",
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "padding": 10
+    },
+    "axis": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#536678",
+      "titleColor": "#16324f"
+    },
+    "header": {
+      "labelFontSize": 16,
+      "labelFontWeight": "bold",
+      "labelColor": "#16324f"
     }
   }
 }

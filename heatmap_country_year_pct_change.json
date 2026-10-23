@@ -1,10 +1,23 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heatmap of the year-on-year percentage change in the Australian resident population born in each of the top 20 overseas countries of birth, 1997 to 2025.",
+  "background": "#eaf3fb",
+  "padding": 20,
   "title": {
-    "text": "Year-on-year growth in Australia's overseas-born population, by country of birth",
-    "subtitle": "Top 20 countries of birth in 2025, ordered by 2025 population. Orange = grew, blue = shrank; colour is capped at +25% (see tooltip for exact values)",
-    "anchor": "start"
+    "text": [
+      "Year-on-year growth in Australia's",
+      "overseas-born population, by country of birth"
+    ],
+    "subtitle": [
+      "Top 20 countries of birth in 2025, ordered by 2025 population",
+      "Orange = grew, blue = shrank; colour is capped at +25% (see tooltip for exact values)"
+    ],
+    "anchor": "start",
+    "fontSize": 28,
+    "color": "#16324f",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#536678",
+    "offset": 20
   },
   "data": {
     "url": "country_year_pct_change_top20.csv"
@@ -100,7 +113,22 @@
     },
     "axis": {
       "domain": false,
-      "ticks": false
+      "ticks": false,
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "labelColor": "#536678",
+      "titleColor": "#16324f"
+    },
+    "font": "Arial",
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "padding": 10
+    },
+    "header": {
+      "labelFontSize": 16,
+      "labelFontWeight": "bold",
+      "labelColor": "#16324f"
     }
   }
 }

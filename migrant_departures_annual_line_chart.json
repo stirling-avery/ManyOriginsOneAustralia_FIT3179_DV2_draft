@@ -1,22 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Calendar-year migrant departures by country of birth for 2015–2024. Each value is the original December year-ending observation converted from thousands to people. Quarterly year-ending observations are not summed. 2025 is excluded because no December observation is available.",
-  "width": 960,
-  "height": 480,
-  "padding": 20,
   "background": "#eaf3fb",
+  "padding": 20,
   "title": {
-    "text": "Migrant departures by country of birth",
+    "text": [
+      "Migrant departures by country of birth"
+    ],
     "subtitle": [
       "Calendar-year totals, 2015–2024 • Departures by country of birth",
-      "Click a legend entry to highlight a country; Shift-click to select several; double-click the chart to reset."
+      "Click a legend entry to highlight a country; Shift-click to select several; double-click the chart to reset"
     ],
     "anchor": "start",
-    "fontSize": 25,
-    "subtitleFontSize": 12,
-    "subtitleColor": "#6b625b",
+    "fontSize": 28,
+    "color": "#16324f",
+    "subtitleFontSize": 13,
+    "subtitleColor": "#536678",
     "offset": 20
   },
+  "width": 960,
+  "height": 480,
   "data": {
     "values": [
       {
@@ -338,7 +341,7 @@
       "axis": {
         "format": ",.0f",
         "tickCount": 6,
-        "gridColor": "#e7e1d9",
+        "gridColor": "#c5d3e0",
         "domain": false,
         "tickSize": 0,
         "labelPadding": 8
@@ -414,8 +417,20 @@
     "font": "Arial",
     "axis": {
       "labelFontSize": 12,
-      "titleFontSize": 13,
-      "titlePadding": 12
+      "titleFontSize": 12,
+      "titlePadding": 12,
+      "labelColor": "#536678",
+      "titleColor": "#16324f"
+    },
+    "legend": {
+      "labelFontSize": 12,
+      "titleFontSize": 12,
+      "padding": 10
+    },
+    "header": {
+      "labelFontSize": 16,
+      "labelFontWeight": "bold",
+      "labelColor": "#16324f"
     }
   }
 }

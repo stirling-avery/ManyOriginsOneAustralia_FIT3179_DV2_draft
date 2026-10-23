@@ -1,22 +1,25 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heat map of citizenship by Migration Program visa category using the supplied citizenship_stream.csv. Values are embedded without changes. Citizenship rows are ordered by descending total places across the six supplied categories. Linear colour scale starts at zero. No reporting year was supplied.",
-  "width": 900,
-  "height": 280,
-  "padding": 20,
   "background": "#eaf3fb",
+  "padding": 20,
   "title": {
-    "text": "Migration pathways by citizenship",
+    "text": [
+      "Migration pathways by citizenship"
+    ],
     "subtitle": [
       "Places across six visa categories • Darker red indicates more places",
       "Citizenships ordered by total places in the supplied data"
     ],
     "anchor": "start",
-    "fontSize": 25,
+    "fontSize": 28,
+    "color": "#16324f",
     "subtitleFontSize": 13,
-    "subtitleColor": "#6b6561",
+    "subtitleColor": "#536678",
     "offset": 20
   },
+  "width": 900,
+  "height": 280,
   "data": {
     "values": [
       {
@@ -199,7 +202,7 @@
     {
       "mark": {
         "type": "rect",
-        "stroke": "#fffdfb",
+        "stroke": "#eaf3fb",
         "strokeWidth": 3
       },
       "encoding": {
@@ -263,12 +266,21 @@
     },
     "font": "Arial",
     "axis": {
-      "labelFontSize": 13,
-      "grid": false
+      "labelFontSize": 12,
+      "grid": false,
+      "titleFontSize": 12,
+      "labelColor": "#536678",
+      "titleColor": "#16324f"
     },
     "legend": {
       "labelFontSize": 12,
-      "titleFontSize": 13
+      "titleFontSize": 12,
+      "padding": 10
+    },
+    "header": {
+      "labelFontSize": 16,
+      "labelFontWeight": "bold",
+      "labelColor": "#16324f"
     }
   }
 }
