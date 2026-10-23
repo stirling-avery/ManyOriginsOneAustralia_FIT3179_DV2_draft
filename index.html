@@ -1,318 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Many Origins, One Australia</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Many Origins, One Australia</title>
 
-  <!-- Fonts (Google Fonts). Fallback stacks are set in the CSS below. -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<!-- Vega, Vega-Lite and Vega-Embed (pinned versions) -->
+<script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
 
-  <!-- Vega, Vega-Lite and Vega-Embed (pinned versions) -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+<style>
+  :root {
+    --rim: #6a7d90;      /* outer rims */
+    --paper: #eaf3fb;    /* pale centre column (same as the chart backgrounds) */
+    --title: #16324f;    /* titles and subtitles, as in the charts */
+    --sub: #536678;      /* secondary text */
+    --ink: #1c2a39;      /* body text */
+    --gap: 1.5rem;
+    --row-gap: 2.5rem;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--rim); color: var(--ink);
+    font: 1.05rem/1.6 Arial, Helvetica, sans-serif;
+  }
+  .page {
+    width: clamp(880px, 48vw, 1100px); max-width: 100%; min-height: 100vh;
+    margin: 0 auto; padding: 2.25rem 2.5rem 3rem; background: var(--paper);
+  }
 
-  <style>
-    :root {
-      /* Colours */
-      --rim: #6a7d90;          /* darker blue/grey outer rims */
-      --paper: #eaf3fb;        /* very pale blue centre column */
-      --ink: #1c2a39;          /* main text */
-      --ink-soft: #4a5b6c;     /* secondary text */
+  /* Header: title left, author box right */
+  .site-header { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap); margin-bottom: var(--row-gap); }
+  h1 { margin: 0; font-size: 28px; line-height: 1.2; color: var(--title); }
+  .author { margin: 0; font-size: 0.8rem; line-height: 1.4; text-align: right; color: var(--sub); white-space: nowrap; }
 
-      /* Layout: the pale column covers roughly 40-50% of a wide screen,
-         but never gets narrower than 880px so the charts stay readable. */
-      --content-width: clamp(880px, 48vw, 1100px);
-      --pad: 2.5rem;           /* inner padding of the pale column */
-      --gap: 1.5rem;           /* space between boxes */
-      --row-gap: 2.75rem;      /* space between rows */
-    }
+  /* Rows (follow the sketch) */
+  .row { display: grid; grid-template-columns: 1fr; gap: var(--gap); align-items: start; margin-bottom: var(--row-gap); }
+  .r-waffle { grid-template-columns: 1.15fr 1fr; }   /* two stacked text boxes | waffle */
+  .r-age    { grid-template-columns: 1fr 1fr; }      /* text | radial chart */
+  .r-line   { grid-template-columns: 1.5fr 1fr; }    /* line chart | text */
+  .stack { display: flex; flex-direction: column; gap: var(--gap); }
 
-    * { box-sizing: border-box; }
+  /* Text boxes: a subtitle (h2) and text (p) */
+  .box h2 { margin: 0 0 0.4rem; font-size: 1.15rem; line-height: 1.3; color: var(--title); }
+  .box p { margin: 0 0 0.9rem; }
+  .box p:last-child { margin-bottom: 0; }
 
-    html { scroll-behavior: smooth; }
+  /* Charts are scaled by the script below so they never need scroll bars */
+  .chart { width: 100%; min-width: 0; min-height: 200px; overflow: hidden; }
+  .chart .vega-embed { display: block; width: 100%; }
+  .chart svg { display: block; margin: 0 auto; height: auto; }
+  .chart-error { margin: 0; padding: 1rem; font-size: 0.9rem; color: #7a2a2a; }
 
-    body {
-      margin: 0;
-      background: var(--rim);
-      color: var(--ink);
-      font-family: "Source Sans 3", "Segoe UI", Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.6;
-    }
+  /* Bibliography */
+  .bibliography h2 { margin: 0 0 0.75rem; font-size: 1.15rem; color: var(--title); }
+  .bibliography ol { margin: 0; padding-left: 1.25rem; font-size: 0.9rem; color: var(--sub); }
+  .bibliography li { margin-bottom: 0.4rem; overflow-wrap: anywhere; }
+  .bibliography a { color: var(--title); }
 
-    /* ---------- The pale centre column ---------- */
-    .page {
-      width: var(--content-width);
-      max-width: 100%;
-      margin: 0 auto;
-      min-height: 100vh;
-      padding: 2.25rem var(--pad) 3rem;
-      background: var(--paper);
-    }
-
-    /* ---------- Header: title left, author block right ---------- */
-    .site-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: var(--gap);
-      margin-bottom: var(--row-gap);
-    }
-
-    .site-header h1 {
-      margin: 0;
-      font-family: "Fraunces", Georgia, "Times New Roman", serif;
-      font-weight: 700;
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-    }
-
-    .author {
-      margin: 0;
-      font-size: 0.8rem;
-      line-height: 1.4;
-      text-align: right;
-      color: var(--ink-soft);
-      white-space: nowrap;
-    }
-
-    /* ---------- Rows ---------- */
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--gap);
-      align-items: stretch;      /* text boxes match the height of the chart beside them */
-      margin-bottom: var(--row-gap);
-    }
-
-    .row.full {
-      grid-template-columns: 1fr;
-    }
-
-    /* Row variants */
-    .row--wide-left   { grid-template-columns: 1.7fr 1fr; }  /* radial chart wider, text narrower */
-    .row--two-thirds  { grid-template-columns: 2fr 1fr; }    /* line chart = 2/3, text = 1/3 */
-    .row--tight       { margin-bottom: 1.25rem; }            /* hex map sits close to its text */
-
-    /* ---------- Chart boxes ---------- */
-    .chart {
-      width: 100%;
-      min-width: 0;              /* lets the grid cell shrink below the chart's natural width */
-      min-height: 200px;
-      overflow: hidden;          /* charts are scaled to fit, so no scroll bars */
-    }
-
-    .chart .vega-embed {
-      display: block;
-      width: 100%;
-    }
-
-    /* Each chart's SVG is scaled by the script below. By default it can
-       shrink to fit its box but never grows past its natural size
-       (the script sets max-width). Charts marked data-fit="fill" grow too. */
-    .chart svg {
-      display: block;
-      margin: 0 auto;
-      height: auto;
-    }
-
-    .chart-error {
-      margin: 0;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #7a2a2a;
-    }
-
-    /* ---------- Text boxes (left empty on purpose) ---------- */
-    .text-box {
-      min-height: 340px;
-      font-size: 1.05rem;
-      line-height: 1.65;
-    }
-
-    /* Short, wide text boxes that sit between charts */
-    .text-box--short {
-      min-height: 90px;
-    }
-
-    .text-box p { margin: 0 0 1rem; }
-
-    /* ---------- Bibliography ---------- */
-    .bibliography h2 {
-      margin: 0 0 0.75rem;
-      font-family: "Fraunces", Georgia, "Times New Roman", serif;
-      font-size: 1.4rem;
-    }
-
-    .bibliography ol {
-      margin: 0;
-      padding-left: 1.25rem;
-      font-size: 0.9rem;
-      color: var(--ink-soft);
-    }
-
-    /* ---------- Narrow screens: stack everything ---------- */
-    @media (max-width: 940px) {
-      :root { --pad: 1.25rem; }
-      .row,
-      .row--wide-left,
-      .row--two-thirds { grid-template-columns: 1fr; }
-      .text-box { min-height: 0; }
-      .author { white-space: normal; }
-    }
-  </style>
+  @media (max-width: 940px) {
+    .page { padding: 1.5rem 1.25rem 2.5rem; }
+    .r-waffle, .r-age, .r-line { grid-template-columns: 1fr; }
+    .author { white-space: normal; }
+  }
+</style>
 </head>
 
 <body>
-  <main class="page">
+<main class="page">
 
-    <!-- ===== Header ===== -->
-    <header class="site-header">
-      <h1>Many Origins, One Australia</h1>
-      <p class="author">
-        Stirling Avery<br>
-        36179418<br>
-        14/10/2026
-      </p>
-    </header>
+  <header class="site-header">
+    <h1>Many Origins, One Australia</h1>
+    <p class="author">Stirling Avery<br>36179418<br>14/10/2026</p>
+  </header>
 
-    <!-- ===== Row 1: text | waffle charts ===== -->
-    <section class="row">
-      <div class="text-box">
-        <!-- Write your text here -->
+  <!-- Row 1: two text boxes | waffle charts -->
+  <section class="row r-waffle">
+    <div class="stack">
+      <div class="box">
+        <h2>How has migration shaped Australia’s population?</h2>
+        <p>Migration has shaped who lives in Australia. In 1905, 20.2% of people were born overseas. By 1945 the share had fallen to 10.3%, then climbed to 20.8% in 1985 and 32% in 2025, so almost one in three Australians today was born somewhere else.</p>
       </div>
-      <div class="chart" data-spec="waffle_overseas_born.json"></div>
-    </section>
-
-    <!-- ===== Row 2: choropleth (full width, scaled to fit) ===== -->
-    <section class="row full">
-      <div class="chart" data-spec="choropleth_country_of_birth_top20.json"></div>
-    </section>
-
-    <!-- ===== Row 3: text (same width as the heatmap below) ===== -->
-    <section class="row full">
-      <div class="text-box text-box--short">
-        <!-- Write your text here -->
+      <div class="box">
+        <h2>Where do Australia’s migrants come from?</h2>
+        <p>The map below shows the twenty most common countries of birth among the overseas-born. India, China and the United Kingdom are the darkest, but Europe, Oceania, Africa and North America also appear alongside a long list of Asian origins.</p>
       </div>
-    </section>
+    </div>
+    <div class="chart" data-spec="waffle_overseas_born.json"></div>
+  </section>
 
-    <!-- ===== Row 4: heatmap (full width, expands to fill) ===== -->
-    <section class="row full">
-      <div class="chart" data-fit="fill" data-spec="heatmap_country_year_pct_change.json"></div>
-    </section>
+  <!-- Row 2: choropleth -->
+  <section class="row">
+    <div class="chart" data-spec="choropleth_country_of_birth_top20.json"></div>
+  </section>
 
-    <!-- ===== Row 5: radial age chart (wider) | text (narrower) ===== -->
-    <section class="row row--wide-left">
-      <div class="chart" data-spec="age_clock_radial.json"></div>
-      <div class="text-box">
-        <!-- Write your text here -->
-      </div>
-    </section>
+  <!-- Row 3: text -->
+  <section class="row">
+    <div class="box">
+      <h2>Which communities have grown fastest?</h2>
+      <p>Size is only half the story. The heatmap below tracks yearly growth in each country’s Australian-resident population. Nepal and India show long runs of dark orange through the 2000s and 2010s, while England, Scotland and Italy changed little or shrank slightly. Growth stalled across most countries around the pandemic years, when borders closed, before recovering.</p>
+    </div>
+  </section>
 
-    <!-- ===== Row 6: flow map (full width, scaled to fit) ===== -->
-    <section class="row full">
-      <div class="chart" data-spec="australia_flow_map.json"></div>
-    </section>
+  <!-- Row 4: heatmap -->
+  <section class="row">
+    <div class="chart" data-fit="fill" data-spec="heatmap_country_year_pct_change.json"></div>
+  </section>
 
-    <!-- ===== Row 7: small text box ===== -->
-    <section class="row full">
-      <div class="text-box text-box--short">
-        <!-- Write your text here -->
-      </div>
-    </section>
+  <!-- Row 5: text | radial age chart -->
+  <section class="row r-age">
+    <div class="box">
+      <h2>Migrants arrive as working-age adults</h2>
+      <p>The age clock shows why the numbers move the way they do. Fewer than 20% of children under 15 were born overseas, but the share jumps among 20–24-year-olds and reaches roughly 40–50% for people in their late twenties to forties. The oldest age groups also have high shares, a legacy of earlier waves of arrivals.</p>
+      <p>This fits the visa data further down, where most places go to skilled workers and partners.</p>
+    </div>
+    <div class="chart" data-spec="age_clock_radial.json"></div>
+  </section>
 
-    <!-- ===== Row 8: treemap (full width) ===== -->
-    <section class="row full">
-      <div class="chart" data-spec="program_streams_treemap.json"></div>
-    </section>
+  <!-- Row 6: flow map -->
+  <section class="row">
+    <div class="chart" data-spec="australia_flow_map.json"></div>
+  </section>
 
-    <!-- ===== Row 9: citizenship heatmap (below the treemap) ===== -->
-    <section class="row full">
-      <div class="chart" data-spec="citizenship_heatmap.json"></div>
-    </section>
+  <!-- Row 7: treemap -->
+  <section class="row">
+    <div class="chart" data-spec="program_streams_treemap.json"></div>
+  </section>
 
-    <!-- ===== Row 10: hex-tile cartogram (full width, expands to fill) ===== -->
-    <section class="row full row--tight">
-      <div class="chart" data-fit="fill" data-spec="state_hex_cartogram.json"></div>
-    </section>
+  <!-- Row 8: text -->
+  <section class="row">
+    <div class="box">
+      <h2>Pathways, citizenship and settlement</h2>
+      <p>India has the most places in 2025 (48,326), well ahead of China (20,405) and the Philippines (10,972). The treemap shows which doors people came through: skill stream visas account for 131,948 places, more than double the 52,500 in the family stream, where partner visas make up 40,500. Humanitarian places total 22,285. Change of Status (101,022) is shown as supplied and may overlap the visa streams, so it is not a count of unique migrants. Citizenship matters too: Indian citizens lead the regional (13,193) and employer sponsored (12,762) categories, while China’s largest category is the family stream (10,972).</p>
+      <p>Where people settle follows population size. Sydney and Melbourne hold the largest dot clusters, and New South Wales (91,570) and Victoria (87,770) added the most people through net overseas migration in 2024–25. Per 1,000 residents, however, the Northern Territory (13.7) and Western Australia (13.3) lead, while Tasmania (4.7) is lowest.</p>
+    </div>
+  </section>
 
-    <!-- ===== Row 11: text under the hex cartogram (short and wide) ===== -->
-    <section class="row full">
-      <div class="text-box text-box--short">
-        <!-- Write your text here -->
-      </div>
-    </section>
+  <!-- Row 9: citizenship heatmap -->
+  <section class="row">
+    <div class="chart" data-spec="citizenship_heatmap.json"></div>
+  </section>
 
-    <!-- ===== Row 12: dot density map (full width, scaled to fit) ===== -->
-    <section class="row full">
-      <div class="chart" data-spec="capital_cities_dot_density.json"></div>
-    </section>
+  <!-- Row 10: dot density map -->
+  <section class="row">
+    <div class="chart" data-spec="capital_cities_dot_density.json"></div>
+  </section>
 
-    <!-- ===== Row 13: line chart (2/3 width) | text (remaining 1/3) ===== -->
-    <section class="row row--two-thirds">
-      <div class="chart" data-fit="fill" data-spec="migrant_departures_annual_line_chart.json"></div>
-      <div class="text-box">
-        <!-- Write your text here -->
-      </div>
-    </section>
+  <!-- Row 11: hex cartogram -->
+  <section class="row">
+    <div class="chart" data-fit="fill" data-spec="state_hex_cartogram.json"></div>
+  </section>
 
-    <!-- ===== Row 14: bibliography (full width) ===== -->
-    <section class="row full">
-      <div class="bibliography">
-        <h2>Bibliography</h2>
-        <ol>
-          <!-- <li>Add each source here (author, title, URL, date accessed).</li> -->
-        </ol>
-      </div>
-    </section>
+  <!-- Row 12: line chart | text -->
+  <section class="row r-line">
+    <div class="chart" data-fit="fill" data-spec="migrant_departures_annual_line_chart.json"></div>
+    <div class="box">
+      <h2>Migration flows both ways</h2>
+      <p>Departures complete the picture. Departures of Australian-born people were 57,800 in 2024, down from 71,180 in 2015, with a pandemic dip to 29,100 in 2020. Departures of people born in China peaked at 84,520 in 2019 and fell to 18,260 in 2022, while India-born departures overtook the United Kingdom in 2020 and reached 17,320 in 2024.</p>
+      <p>Together, the charts show a population built through arrivals, skills and family ties, and reshaped over time by policy, the pandemic and a changing mix of origins.</p>
+    </div>
+  </section>
 
-  </main>
+  <!-- Row 13: bibliography -->
+  <section class="row">
+    <div class="bibliography">
+      <h2>Bibliography</h2>
+      <ol>
+        <li>Australian Bureau of Statistics, <em>Australia’s population by country of birth</em>, <a href="https://www.abs.gov.au/statistics/people/population/australias-population-country-birth/latest-release">https://www.abs.gov.au/statistics/people/population/australias-population-country-birth/latest-release</a></li>
+        <li>Department of Home Affairs, <em>Country profiles</em>, <a href="https://www.homeaffairs.gov.au/research-and-statistics/statistics/country-profiles/profiles">https://www.homeaffairs.gov.au/research-and-statistics/statistics/country-profiles/profiles</a></li>
+        <li>Department of Home Affairs, <em>Migration trends 2024–25</em>, <a href="https://www.homeaffairs.gov.au/research-and-stats/files/migration-trends-2024-25.pdf">https://www.homeaffairs.gov.au/research-and-stats/files/migration-trends-2024-25.pdf</a></li>
+        <li>Australian Bureau of Statistics, <em>Overseas migration</em>, <a href="https://www.abs.gov.au/statistics/people/population/overseas-migration/latest-release">https://www.abs.gov.au/statistics/people/population/overseas-migration/latest-release</a></li>
+        <li>Australian Bureau of Statistics, <em>Census DataPacks</em>, <a href="https://www.abs.gov.au/census/find-census-data/datapacks">https://www.abs.gov.au/census/find-census-data/datapacks</a></li>
+      </ol>
+    </div>
+  </section>
 
-  <script>
-    // Folder that holds the JSON files, relative to this page.
-    // Leave as "" if they sit next to index.html, or use e.g. "specs/".
-    const SPEC_DIR = "";
+</main>
 
-    // Scales a chart's SVG so it fits its box without a scroll bar.
-    // Default: shrinks to fit, never grows beyond its natural size.
-    // data-fit="fill": also grows to fill the box width.
-    function fitChart(el) {
-      const svg = el.querySelector("svg");
-      if (!svg) return;
-      const w = parseFloat(svg.getAttribute("width"));
-      const h = parseFloat(svg.getAttribute("height"));
-      if (!w || !h) return;
-      svg.setAttribute("viewBox", "0 0 " + w + " " + h);
-      svg.removeAttribute("width");
-      svg.removeAttribute("height");
-      svg.style.width = "100%";
-      svg.style.maxWidth = el.dataset.fit === "fill" ? "none" : w + "px";
-      svg.style.height = "auto";
-    }
+<script>
+  // Folder holding the JSON chart files, relative to this page ("" = next to index.html).
+  const SPEC_DIR = "";
 
-    // Every element with a data-spec attribute loads that Vega-Lite file.
-    document.querySelectorAll(".chart[data-spec]").forEach((el) => {
-      const url = SPEC_DIR + el.dataset.spec;
+  // Scales a chart's SVG to fit its box: shrinks to fit, never grows past its natural size.
+  // data-fit="fill" also lets it grow to the box width.
+  function fitChart(el) {
+    const svg = el.querySelector("svg");
+    if (!svg) return;
+    const w = parseFloat(svg.getAttribute("width")), h = parseFloat(svg.getAttribute("height"));
+    if (!w || !h) return;
+    svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+    svg.style.width = "100%";
+    svg.style.maxWidth = el.dataset.fit === "fill" ? "none" : w + "px";
+    svg.style.height = "auto";
+  }
 
-      vegaEmbed(el, url, {
-        actions: false,                 // hide the "..." export menu
-        renderer: "svg",
-        config: { background: "transparent" }   // lets the pale blue show through
-      }).then(() => {
-        fitChart(el);
-      }).catch((err) => {
+  document.querySelectorAll(".chart[data-spec]").forEach((el) => {
+    const url = SPEC_DIR + el.dataset.spec;
+    vegaEmbed(el, url, { actions: false, renderer: "svg", config: { background: "transparent" } })
+      .then(() => fitChart(el))
+      .catch((err) => {
         console.error("Could not load " + url, err);
-        el.innerHTML =
-          '<p class="chart-error">Could not load <code>' + url + "</code>. " +
-          "Check the file name and that the page is served from a web server " +
-          "(GitHub Pages or <code>python -m http.server</code>), not opened as a file.</p>";
+        el.innerHTML = '<p class="chart-error">Could not load <code>' + url + "</code>. Check the file name and that the page is served from a web server (GitHub Pages or <code>python -m http.server</code>), not opened as a file.</p>";
       });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
