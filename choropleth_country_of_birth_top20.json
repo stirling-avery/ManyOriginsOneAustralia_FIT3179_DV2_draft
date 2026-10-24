@@ -106,7 +106,8 @@
           "legend": {
             "orient": "bottom",
             "direction": "horizontal",
-            "gradientLength": 300
+            "gradientLength": 300,
+            "titleLimit": 400
           }
         },
         "tooltip": [
