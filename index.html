@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Many Origins, One Australia</title>
 
+<!-- Title font (Google Fonts). Fallback stack is set in the CSS below. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&display=swap" rel="stylesheet">
+
 <!-- Vega, Vega-Lite and Vega-Embed (pinned versions) -->
 <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
@@ -33,7 +38,14 @@
 
   /* Header: title left, author box right */
   .site-header { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--gap); margin-bottom: var(--row-gap); }
-  h1 { margin: 0; font-size: 28px; line-height: 1.2; color: var(--title); }
+  h1 {
+    margin: 0;
+    font-family: "Fraunces", Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
   .author { margin: 0; font-size: 0.8rem; line-height: 1.4; text-align: right; color: var(--sub); white-space: nowrap; }
 
   /* Rows (follow the sketch) */
